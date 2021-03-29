@@ -74,12 +74,11 @@ public class ArrayUtility<E> {
     }
 
     public E[] removeValue(E valueToRemove) {
-        Object[] valueRemoved = new Object[inputArray.length];
-        Integer counter = 0;
+        Integer counter = getNumberOfOccurrences(valueToRemove);
+        E[] valueRemoved = Arrays.copyOf(inputArray, inputArray.length - counter);
 
         for (int i = 0, j = 0; i < inputArray.length; i++) {
             if (inputArray[i] == valueToRemove) {
-                counter++;
                 continue;
             } else {
                 valueRemoved[j] = inputArray[i];
@@ -87,6 +86,6 @@ public class ArrayUtility<E> {
             }
         }
 
-        return (E[]) Arrays.copyOf(valueRemoved, inputArray.length - counter);
+        return valueRemoved;
     }
 }
